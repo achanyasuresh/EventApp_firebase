@@ -6,6 +6,7 @@ import Dashboard from '../screens/Dashboard/Dashboard';
 import AddEvents from '../screens/Events/AddEvents';
 import Header from '../components/Header/Header';
 import Signup from '../screens/Signup/Signup';
+import ViewEvent from '../screens/View/View'; 
 
 function App() {
     
@@ -22,6 +23,8 @@ function App() {
           <Route  path="/dashboard" component={Dashboard} />
           <Route  path="/addevents" component={AddEvents} />
           <Route  path="/signup" component={Signup} />
+          <Route  path="/view" component={ViewEvent} />
+
           
   
           

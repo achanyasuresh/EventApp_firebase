@@ -8,6 +8,8 @@
     margin-bottom: 20px;
     margin-left: auto;
     margin-right: auto;
+    height: 55vh;
+    width: 280;
 
 }
 .headerStyle {
@@ -16,4 +18,8 @@
 }
 .avatarStyle {
     color: blueviolet;
+}
+.buttonStyle {
+    width: 300px;
+    
 }

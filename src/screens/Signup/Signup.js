@@ -10,14 +10,15 @@ import Checkbox from '@material-ui/core/Checkbox';
 import Select from '@material-ui/core/Select';
 import MenuItem from '@material-ui/core/MenuItem';
 import FormControl from '@material-ui/core/FormControl';
-import "../Signup/Signup.css";
+import "../Signup/Styles.css";
 import Avatar from '@material-ui/core/Avatar';
+import Link from '@material-ui/core/Link';
 import AddCircleOutlineOutlinedIcon from '@material-ui/icons/AddCircleOutlineOutlined';
 import {register} from "../contexts/AuthContext"
 
 
 const Signup = () => {
-  
+  const avatarStyle = {backgroundColor: "blueviolet"}
   const [form,setForm] = useState({
     name: '',
     phone:'',
@@ -34,16 +35,16 @@ const handleSubmit = async(e)=>{
 }
  
   
-  // const Tosignup = () =>{
-  //   history.push("/login");
+  const toLogin = () =>{
+    history.push("/login");
 
-  // }
+  }
   return (
     <Grid>
       <Paper elevation={20} className="paperStyle">
       
         <Grid align='center'>
-          <Avatar className='avatarStyle' color="primary">
+          <Avatar className='avatarStyle' color="primary" style={avatarStyle}> 
             <AddCircleOutlineOutlinedIcon />
           </Avatar>
           <h2 className='headerStyle'>Signup</h2>
@@ -108,10 +109,17 @@ const handleSubmit = async(e)=>{
           type='submit' 
           variant="contained" 
           color="primary" 
+          className='buttonStyle'
           > 
            Sign Up
           </Button>
           <br /><br />
+          <Typography >
+              Already have an account ?
+            <Link href="#" onClick={toLogin}>
+                Login 
+              </Link>
+            </Typography>
         </form>
       </Paper>
     </Grid>

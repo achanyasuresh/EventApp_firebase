@@ -1,6 +1,6 @@
 import React , {useState} from 'react';
 import {useHistory } from "react-router-dom"
-import "../Login/Login.css";
+import "./Styles.css";
 import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
@@ -39,7 +39,7 @@ const Login = () => {
     <Grid>
       <Paper elevation={10} className="paperStyle">
         <Grid align='center'>
-          <Avatar className="avatarStyle" color="primary">
+          <Avatar className="avatarStyle" color="primary" style={ avatarStyle}> 
             <LockOutlinedIcon />
           </Avatar>
           <h2 className='headerStyle'>Login</h2>
@@ -51,6 +51,7 @@ const Login = () => {
           onChange={(e) => 
             setForm({...form, email: e.target.value})}
           />
+          <br /> <br />
           
           <TextField  id='password'  fullWidth label="Password" type= "password" placeholder='Enter your password' required
           onChange={(e) => 
@@ -61,6 +62,7 @@ const Login = () => {
               name="checkedA" />}
             label="Remember Me"
           />
+           <br /> <br />
              <div> 
           <Button 
           className='buttonStyle'
@@ -71,11 +73,13 @@ const Login = () => {
             >  
             Login
             </Button>
+            <br /> <br />
             <Typography >
             <Link href="#" >
                 Forgot Password
               </Link>
             </Typography>
+            <br />
             <Typography >
               Do you have an account ?
             <Link href="#" onClick={toSignup}>

@@ -1,0 +1,43 @@
+.paper {
+    padding-left: 50px;
+    padding-right: 24px;
+    padding-bottom: 8px;
+    align-items: center;
+    margin-top: 100px;
+    margin-left: 20px;
+    margin-right: 20px;
+    margin-bottom: 300px;
+    width: 100;
+    
+
+}
+.paperStyle {
+    padding-left: 53px;
+    padding-right: 14px;
+    padding-bottom: 8px;
+}
+.formControl {
+    min-width: 200px;
+
+}
+.textField{
+    width: 94%;
+    text-align: left;
+    letter-spacing: 0px;
+    opacity: 1;
+    height: 45px;
+}
+
+/* .grid {
+    margin-top: 26px;
+    padding-top: 17px;
+    padding-right: 18px;
+    padding-left: 22px;
+
+  } */
+/* .maingrid {
+    padding-bottom: 15px;
+}
+.subgrid {
+    padding-bottom: 6px;
+} */

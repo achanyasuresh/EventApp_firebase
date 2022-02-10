@@ -1,0 +1,106 @@
+.eventContainer {
+    height: auto;
+    width: 100%;
+    background-color: transparent;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    flex-wrap: wrap;
+    
+}
+.eventCard {
+    height: 48vh;
+    width: 20%;
+    background-color: whitesmoke;
+    margin-top: 30px;
+    margin-bottom: 8px;
+    padding: 8px;
+}
+.eventImage {
+    height: 45%;
+    width: 100%;
+    background-color: transparent;
+}
+.eventInfo {
+    height: 9%;
+    width: 100%;
+    background-color: transparent;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 1px solid grey;
+}
+.location {
+    height: 90%;
+    width: 50%;
+    background-color: transparent;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: grey;
+}
+.date {
+    height: 90%;
+    width: 40%;
+    background-color: transparent;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: grey;
+}
+.eventDetails {
+    height: 34%;
+    width: 100%;
+    background-color: transparent;
+}
+.heading {
+   height: 60%;
+   width: 100%;
+   background-color: transparent; 
+   display: flex;
+   align-items: center;
+   font-size: 1.6rem;
+   font-weight: bold;
+
+}
+.desc {
+    height: 40%;
+    width: 100%;
+    background-color: transparent;
+    font-size: 1rem;
+    color: gray;
+}
+.eventSell {
+    height: 10%;
+    width: 100%;
+    background-color: transparent;
+    margin-top: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.view {
+    height: 100%;
+    width: 40%;
+    background-color: transparent;
+}
+.prize {
+    height: 100%;
+    width: 40%;
+    background-color: transparent;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.3rem;
+
+
+}
+.viewButton {
+    height: 100%;
+    width: 100%;
+    background-color:  green;
+    border: 0px;
+    font-size: 1.1rem;
+    color: whitesmoke;
+    border-radius: 20px;
+}
