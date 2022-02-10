@@ -1,0 +1,25 @@
+.paperStyle {
+    padding-left: 30px;
+    padding-right: 20px;
+    padding-top: 30px;
+    padding-bottom: 20px;
+    width: 300px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    margin-left: auto;
+    margin-right: auto;
+    height: 50vh;
+    width: 280;
+
+}
+.headerStyle {
+    margin-top: 0;
+    margin-bottom: 0;
+}
+.avatarStyle {
+    color: blueviolet;
+}
+.buttonStyle {
+    padding-top: 300px;
+    padding-bottom: 200px;
+}

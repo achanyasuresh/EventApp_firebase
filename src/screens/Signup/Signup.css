@@ -1,0 +1,19 @@
+.paperStyle {
+    padding-left: 30px;
+    padding-right: 20px;
+    padding-top: 30px;
+    padding-bottom: 20px;
+    width: 300px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    margin-left: auto;
+    margin-right: auto;
+
+}
+.headerStyle {
+    margin-top: 0;
+    margin-bottom: 0;
+}
+.avatarStyle {
+    color: blueviolet;
+}
