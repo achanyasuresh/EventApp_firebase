@@ -19,14 +19,15 @@ const initialState = {
   contactperson : '',
   contactnumber : '',
   email : '',
-  eventtype : ''
+  eventtype : '',
+  description: ''
 
 };
 
 const AddEvents = () => {
   const [state, setState] =useState(initialState);
   const[data, setData] = useState({});
-  const {eventname,eventdate,eventlocation,contactperson,contactnumber,email,eventtype} = state;
+  const {eventname,eventdate,eventlocation,contactperson,contactnumber,email,eventtype,description} = state;
   const history = useHistory();
 
   const handleSubmit = (e) => {
@@ -165,24 +166,39 @@ const AddEvents = () => {
                       /</TextField>
                   </Grid>
                   <Grid xs={12} md={4} item >
-                    <FormControl variant="outlined" fullWidth>
-                      <InputLabel id="demo-simple-select-outlined-label">Event Type</InputLabel>
-                      <Select
-                        labelId="demo-simple-select-outlined-label"
-                        id="eventtype"
-                        value={eventtype}
-                        onChange={handleInputChange}
-                        name="eventtype"
-                        label="Event Type"
-                      >
-                        <MenuItem value="">
-                          <em>None</em>
-                        </MenuItem>
-                        <MenuItem value={1}>Online</MenuItem>
-                        <MenuItem value={2}>Offline</MenuItem>
-
-                      </Select>
-                    </FormControl>
+                    <TextField
+                      fullWidth
+                      className='textField'
+                      id="description"
+                      label="Description"
+                      multiline
+                      maxRows={4}
+                      margin="dense"
+                      variant="outlined"
+                      required
+                      name="description"
+                      onChange={handleInputChange}
+                      value={description}
+                    >
+                      /</TextField>
+                  </Grid>
+                  <Grid xs={12} md={4} item >
+                  <TextField
+                      fullWidth
+                      className='textField'
+                      id="eventtype"
+                      label="Event Type"
+                      multiline
+                      maxRows={4}
+                      margin="dense"
+                      variant="outlined"
+                      required
+                      name="eventtype"
+                      onChange={handleInputChange}
+                      value={eventtype}
+                    >
+                      /</TextField>
+                   
                   </Grid>
 
 

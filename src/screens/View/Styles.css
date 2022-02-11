@@ -41,7 +41,7 @@
 }
 .date {
     height: 90%;
-    width: 40%;
+    width: 60%;
     background-color: transparent;
     display: flex;
     align-items: center;
@@ -69,6 +69,17 @@
     background-color: transparent;
     font-size: 1rem;
     color: gray;
+}
+.status {
+  height: 40%;
+    width: 100%;
+    background-color: transparent;
+    font-size: 1rem;
+    color: gray;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
 }
 .eventSell {
     height: 10%;
@@ -104,3 +115,68 @@
     color: whitesmoke;
     border-radius: 20px;
 }
+
+.paginationBttns {
+    width: 80%;
+    height: 40px;
+    list-style: none;
+    display: flex;
+    justify-content: center;
+  }
+  
+  .paginationBttns a {
+    padding: 10px;
+    margin: 8px;
+    border-radius: 5px;
+    border: 1px solid #2b2eff;
+    color:blueviolet;
+    cursor: pointer;
+  }
+  
+  .paginationBttns a:hover {
+    color: white;
+    background-color:blueviolet;
+  }
+  
+  .paginationActive a {
+    color: white;
+    background-color: blueviolet;
+  }
+  
+  .paginationDisabled a {
+    color: grey;
+    background-color: grey;
+  
+  }
+  
+  .paginationBttns {
+    width: 80%;
+    height: 40px;
+    list-style: none;
+    display: flex;
+    justify-content: center;
+  }
+  
+  .paginationBttns a {
+    padding: 10px;
+    margin: 8px;
+    border-radius: 5px;
+    border: 1px solid blueviolet;
+    color: blueviolet;
+    cursor: pointer;
+  }
+  
+  .paginationBttns a:hover {
+    color: white;
+    background-color: blueviolet;
+  }
+  
+  .paginationActive a {
+    color: white;
+    background-color: blueviolet;
+  }
+  
+  .paginationDisabled a {
+    color: grey;
+    background-color: grey;
+  }

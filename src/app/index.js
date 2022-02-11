@@ -7,6 +7,8 @@ import AddEvents from '../screens/Events/AddEvents';
 import Header from '../components/Header/Header';
 import Signup from '../screens/Signup/Signup';
 import ViewEvent from '../screens/View/View'; 
+import Search from '../screens/View/Search';
+import SubHeader from '../components/SubHeader/SubHeader';
 
 function App() {
     
@@ -24,8 +26,11 @@ function App() {
           <Route  path="/addevents" component={AddEvents} />
           <Route  path="/signup" component={Signup} />
           <Route  path="/view" component={ViewEvent} />
+          <Route  path="/search" component={Search} />
+          <Route  path="/sub" component={SubHeader} />
 
-          
+
+            
   
           
       </Switch>

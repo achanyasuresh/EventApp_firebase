@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {useHistory } from "react-router-dom";
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
@@ -71,21 +71,25 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 
 
 const Header = () => {
-  const [anchorElNav, setAnchorElNav] = React.useState(null);
+    const [anchorElNav, setAnchorElNav] = React.useState(null);
     const [anchorElUser, setAnchorElUser] = React.useState(null);
+    const[search, setSearch] = useState();
     let history = useHistory();
   
     const handleOpenUserMenu = (event) => {
       setAnchorElUser(event.currentTarget);
     };
     const addEvent = () => {
-      alert("you clicked");
       history.push("/addevents");
     };
     const toHome = () => {
-        alert("you clicked");
         history.push("/dashboard");
       };
+      const handleSubmit = (e) => {
+        e.preventDefault();
+        history.push(`/search?eventname=${search}`);
+        setSearch("");
+      }
   return (
     <Grid>
       <AppBar position="static">
@@ -115,6 +119,7 @@ const Header = () => {
               onClick = {addEvent}
               />
             </StyledFab>
+            <form onSubmit={handleSubmit}>
           <Search>
               <SearchIconWrapper>
                 <SearchIcon />
@@ -122,8 +127,11 @@ const Header = () => {
               <StyledInputBase
                 placeholder="Search…"
                 inputProps={{ 'aria-label': 'search' }}
+                onChange={(e) => setSearch(e.target.value)}
+                value={search}
               />
           </Search>
+          </form>
           <Box sx={{ flexGrow: 0 }}>
             <Tooltip title="Open settings">
               <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
