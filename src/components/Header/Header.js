@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import {useHistory } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
@@ -71,111 +71,110 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 
 
 const Header = () => {
-    const [anchorElNav, setAnchorElNav] = React.useState(null);
-    const [anchorElUser, setAnchorElUser] = React.useState(null);
-    const[search, setSearch] = useState();
-    const [data, setData] = useState(false);
-    const [tokenVal, setTokenVal] = useState(false);
-    let history = useHistory();
-  
+  const [anchorElNav, setAnchorElNav] = React.useState(null);
+  const [anchorElUser, setAnchorElUser] = React.useState(null);
+  const [search, setSearch] = useState();
+  const [data, setData] = useState(false);
+  const [tokenVal, setTokenVal] = useState(false);
+  let history = useHistory();
 
-    useEffect (() => {
-      const token = localStorage.getItem("token")
-      console.log("token", token);
-      if (token){
-        setTokenVal(true);
-      }
-      else{
-        setTokenVal(false);
-      }
-    } ,[setTokenVal])
 
-     
-    const toSignup = () => {
-      history.push("/signup")
-    };
-    const addEvent = () => {
-      history.push("/addevents");
-    };
-    const toHome = () => {
-        history.push("/dashboard");
-      };
-    const toLogout = () => {
-
+  useEffect(() => {
+    const token = localStorage.getItem("token")
+    if (token) {
+      setTokenVal(true);
     }
-      const handleSubmit = (e) => {
-        e.preventDefault();
-        history.push(`/search?eventname=${search}`);
-        setSearch("");
-      }
+    else {
+      setTokenVal(false);
+    }
+  }, [setTokenVal])
+
+
+  const toSignup = () => {
+    history.push("/signup")
+  };
+  const addEvent = () => {
+    history.push("/addevents");
+  };
+  const toHome = () => {
+    history.push("/dashboard");
+  };
+  const toLogout = () => {
+
+  }
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    history.push(`/search?eventname=${search}`);
+    setSearch("");
+  }
   return (
     <Grid>
       <AppBar position="static">
-      <Container maxWidth="xl">
-        <Toolbar disableGutters>
-          <Typography
-            variant="h5"
-            noWrap
-            component="div"
-            sx={{ mr: 110, display: { xs: 'none', md: 'flex' } }}
-          >
-           Eventoo
-          </Typography>
-          <Button variant="contained" color="secondary" onClick={toHome}>
-                Home
-          </Button>
-  
-          <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
-            
-          </Box>
-          
-          <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
-           
-          </Box>
-          
-            {tokenVal == true ? 
+        <Container maxWidth="xl">
+          <Toolbar disableGutters>
+            <Typography
+              variant="h5"
+              noWrap
+              component="div"
+              sx={{ mr: 110, display: { xs: 'none', md: 'flex' } }}
+            >
+              Eventoo
+            </Typography>
+            <Button variant="contained" color="secondary" onClick={toHome}>
+              Home
+            </Button>
 
-            
-          <StyledFab color="secondary" aria-label="add">
-              <AddIcon 
-              onClick = {addEvent}
-              />
-          </StyledFab>  
-          : null }    
-          
+            <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
+
+            </Box>
+
+            <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
+
+            </Box>
+
+            {tokenVal == true ?
+
+
+              <StyledFab color="secondary" aria-label="add">
+                <AddIcon
+                  onClick={addEvent}
+                />
+              </StyledFab>
+              : null}
+
 
             <form onSubmit={handleSubmit}>
-          <Search>
-              <SearchIconWrapper>
-                <SearchIcon />
-              </SearchIconWrapper>
-              <StyledInputBase
-                placeholder="Search…"
-                inputProps={{ 'aria-label': 'search' }}
-                onChange={(e) => setSearch(e.target.value)}
-                value={search}
-              />
-          </Search>
-          </form>
-          <Box sx={{ flexGrow: 0 }}>
-            <Tooltip title="Open settings">
-            <Button variant="contained" color="secondary" onClick={toSignup}>
-                Sign Up
-          </Button>
-            </Tooltip>
-            
-          </Box>
-          <Box sx={{ flexGrow: 0 }}>
-            <Tooltip title="Open settings">
-            <Button variant="contained" color="secondary" onClick={toLogout}>
-                Logout
-          </Button>
-            </Tooltip>
-            
-          </Box>
-        </Toolbar>
-      </Container>
-    </AppBar>
+              <Search>
+                <SearchIconWrapper>
+                  <SearchIcon />
+                </SearchIconWrapper>
+                <StyledInputBase
+                  placeholder="Search…"
+                  inputProps={{ 'aria-label': 'search' }}
+                  onChange={(e) => setSearch(e.target.value)}
+                  value={search}
+                />
+              </Search>
+            </form>
+            <Box sx={{ flexGrow: 0 }}>
+              <Tooltip title="Open settings">
+                <Button variant="contained" color="secondary" onClick={toSignup}>
+                  Sign Up
+                </Button>
+              </Tooltip>
+
+            </Box>
+            <Box sx={{ flexGrow: 0 }}>
+              <Tooltip title="Open settings">
+                <Button variant="contained" color="secondary" onClick={toLogout}>
+                  Logout
+                </Button>
+              </Tooltip>
+
+            </Box>
+          </Toolbar>
+        </Container>
+      </AppBar>
     </Grid>
   )
 }

@@ -13,7 +13,7 @@ const Search = () => {
     }
     let query = useQuery();
     let search = query.get("eventname");
-    console.log("search ", search);
+
 
     useEffect (() =>{
         searchData();

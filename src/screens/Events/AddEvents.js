@@ -36,7 +36,7 @@ const AddEvents = () => {
   const history = useHistory();
 
   const handleSubmit = (e) => {
-    console.log ("inside submit")
+  
     e.preventDefault();
     if(!eventname || !eventdate || !eventlocation || !contactnumber || !contactperson || !email || !eventtype ||!description) {
       alert("Please enter the field value");
@@ -44,7 +44,7 @@ const AddEvents = () => {
     }
     else {
       fireDb.child("Events").push(state, (err) => {
-        console.log("db")
+        
         if(err)
         {
           

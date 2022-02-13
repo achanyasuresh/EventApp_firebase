@@ -1,19 +1,19 @@
 
 import firebase from 'firebase/app';
 import "firebase/auth"
-import {auth} from "../../firebase";
+import { auth } from "../../firebase";
 
-export const register = async({email, password})=>{
-    const resp = await firebase.auth()
-      .createUserWithEmailAndPassword(email, password);
-    return resp.user;
+export const register = async ({ email, password }) => {
+  const resp = await firebase.auth()
+    .createUserWithEmailAndPassword(email, password);
+  return resp.user;
 }
-  
-export const login = async({email, password})=>{
-    const res = await firebase.auth()
-      .signInWithEmailAndPassword(email, password);
-      
-      localStorage.setItem("token" ,res.user.refreshToken);
-    return res.user;
-    
+
+export const login = async ({ email, password }) => {
+  const res = await firebase.auth()
+    .signInWithEmailAndPassword(email, password);
+
+  localStorage.setItem("token", res.user.refreshToken);
+  return res.user;
+
 }

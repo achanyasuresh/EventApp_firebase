@@ -1,5 +1,5 @@
-import React, {useState, useEffect} from 'react';
-import {useHistory} from "react-router-dom"
+import React, { useState, useEffect } from 'react';
+import { useHistory } from "react-router-dom"
 import { alpha, makeStyles } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
@@ -30,7 +30,7 @@ const useStyles = makeStyles((theme) => ({
     },
   },
   search: {
-   
+
     position: 'relative',
     borderRadius: theme.shape.borderRadius,
     backgroundColor: alpha(theme.palette.common.white, 0.15),
@@ -81,19 +81,18 @@ export default function Head() {
   const classes = useStyles();
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
-  const[search, setSearch] = useState();
+  const [search, setSearch] = useState();
   const [tokenVal, setTokenVal] = useState(false);
   const history = useHistory();
-  useEffect (() => {
+  useEffect(() => {
     const token = localStorage.getItem("token")
-    console.log("token", token);
-    if (token){
+    if (token) {
       setTokenVal(true);
     }
-    else{
+    else {
       setTokenVal(false);
     }
-  } ,[setTokenVal])
+  }, [setTokenVal])
 
 
   const isMenuOpen = Boolean(anchorEl);
@@ -103,31 +102,31 @@ export default function Head() {
     setAnchorEl(event.currentTarget);
   };
 
-   const handleMenuClose = () => {
+  const handleMenuClose = () => {
     setAnchorEl(null);
-    
+
   };
 
-  
+
   const toHome = () => {
-        history.push("/dashboard")
+    history.push("/dashboard")
   }
   const addEvents = () => {
     history.push("/addevents")
-}
-const handleSubmit = (e) => {
+  }
+  const handleSubmit = (e) => {
     e.preventDefault();
     history.push(`/search?eventname=${search}`);
     setSearch("");
   }
-  const toLogin = () =>{
-      history.push("/login")
+  const toLogin = () => {
+    history.push("/login")
   }
-  const toLogout =() =>{
+  const toLogout = () => {
     localStorage.removeItem("token");
     history.go(0)
 
-      history.push("/dashboard");
+    history.push("/dashboard");
 
   }
 
@@ -196,65 +195,51 @@ const handleSubmit = (e) => {
             Eventooo
           </Typography>
           <form onSubmit={handleSubmit}>
-          <div className={classes.search}>
-            <div className={classes.searchIcon}>
-            
-              <SearchIcon />
-            </div>
-            <InputBase
-              placeholder="Search…"
-              onChange={(e) => setSearch(e.target.value)}
+            <div className={classes.search}>
+              <div className={classes.searchIcon}>
+
+                <SearchIcon />
+              </div>
+              <InputBase
+                placeholder="Search…"
+                onChange={(e) => setSearch(e.target.value)}
                 value={search}
-              classes={{
-                root: classes.inputRoot,
-                input: classes.inputInput,
-              }}
-              inputProps={{ 'aria-label': 'search' }}
-            />
-          </div>
+                classes={{
+                  root: classes.inputRoot,
+                  input: classes.inputInput,
+                }}
+                inputProps={{ 'aria-label': 'search' }}
+              />
+            </div>
           </form>
-         
+
           <div className={classes.grow} />
           <div className={classes.sectionDesktop}>
-          <Tooltip title="Home" placement="top-start">
-            <IconButton aria-label="show 4 new mails" color="inherit" onClick={toHome}> 
-              
-                < HomeIcon/>
-               
-              
-            </IconButton>
-            </Tooltip>
-            {tokenVal == true ? 
-            <Tooltip title="Add Events" position="top">
-            <IconButton aria-label="show 17 new notifications" color="inherit" onClick={addEvents}>
-              
-                <AddCircleTwoToneIcon />
-              
-            </IconButton>
-            </Tooltip>
-            : null }
-                {tokenVal == false ? 
-               <button className='Button1' onClick={toLogin} >Login</button>
-               : null }
-               {tokenVal == true ? 
-                    <button className='Button2' onClick={toLogout}>Log out</button>
-                : null }
-                   
-      
+            <Tooltip title="Home" placement="top-start">
+              <IconButton aria-label="show 4 new mails" color="inherit" onClick={toHome}>
 
-           
-            {/* <IconButton
-              edge="end"
-              aria-label="account of current user"
-              aria-controls={menuId}
-              aria-haspopup="true"
-              onClick={handleProfileMenuOpen}
-              color="inherit"
-            >
-              <AccountCircle />
-            </IconButton> */}
+                < HomeIcon />
+
+
+              </IconButton>
+            </Tooltip>
+            {tokenVal == true ?
+              <Tooltip title="Add Events" position="top">
+                <IconButton aria-label="show 17 new notifications" color="inherit" onClick={addEvents}>
+
+                  <AddCircleTwoToneIcon />
+
+                </IconButton>
+              </Tooltip>
+              : null}
+            {tokenVal == false ?
+              <button className='Button1' onClick={toLogin} >Login</button>
+              : null}
+            {tokenVal == true ?
+              <button className='Button2' onClick={toLogout}>Log out</button>
+              : null}
           </div>
-          
+
         </Toolbar>
       </AppBar>
       {renderMobileMenu}

@@ -55,14 +55,13 @@ const Dashboard = () => {
 
   useEffect(() => {
     
-    console.log("inside effect")
     fireDb.child('Events').on('value', snapshot => {
-        console.log("inside db")
+        
 
         if(snapshot.val() !== null) {  
-            console.log("inside iffff") 
+          
             setData({ ...snapshot.val() })
-            console.log("value", snapshot.val())
+
         } 
         else {
             setData({})

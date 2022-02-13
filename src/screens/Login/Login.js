@@ -28,7 +28,7 @@ const Login = () => {
     e.preventDefault();
     await login(form);
     alert(Error);
-    console.log("success")
+  
     history.push("/dashboard")
 }
 

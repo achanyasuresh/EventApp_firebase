@@ -32,8 +32,6 @@ const history = useHistory();
 const handleSubmit = async(e)=>{
   e.preventDefault();
   await register(form);
-  console.log("eee",form);
-  console.log("eee",e)
    history.push("/login");
 }
  
