@@ -10,7 +10,10 @@ import MenuItem from '@material-ui/core/MenuItem';
 import FormControl from '@material-ui/core/FormControl';
 import InputLabel from '@material-ui/core/InputLabel';
 import "../Events/Styles.css";
+import {toast} from "react-toastify";
 import  fireDb from "../../firebase";
+import Header from '../../components/Header/Header';
+import Head from '../../components/Header/head';
 
 const initialState = {
   eventname : '',
@@ -27,27 +30,30 @@ const initialState = {
 const AddEvents = () => {
   const [state, setState] =useState(initialState);
   const[data, setData] = useState({});
+
+  const [isError, setIsError] = useState(false);
   const {eventname,eventdate,eventlocation,contactperson,contactnumber,email,eventtype,description} = state;
   const history = useHistory();
 
   const handleSubmit = (e) => {
     console.log ("inside submit")
     e.preventDefault();
-    if(!eventname ) {
-      alert("please enter the field value");
-      console.log("first if")
+    if(!eventname || !eventdate || !eventlocation || !contactnumber || !contactperson || !email || !eventtype ||!description) {
+      alert("Please enter the field value");
+      
     }
     else {
       fireDb.child("Events").push(state, (err) => {
         console.log("db")
         if(err)
         {
+          
           alert(err); 
         }
         else 
         {
-          console.log("event add")
-          alert("Event added successfully");
+         
+          toast.success("contact added successfully");
         }
       });
       setTimeout(() => history.push("/dashboard"),500);
@@ -62,6 +68,7 @@ const AddEvents = () => {
   return (
     <Grid >
       <Paper >
+        <Head />
         <div>
           <Fragment>
             <div>
@@ -70,7 +77,7 @@ const AddEvents = () => {
                   You can add event here
                 </Typography>
                 <br /> <br />
-                {/* <form onSubmit={handleSubmit} > */}
+                <form onSubmit={handleSubmit} >
                 <Grid container spacing={2}>
                   <Grid xs={12} md={4} item >
                     <TextField
@@ -94,7 +101,7 @@ const AddEvents = () => {
                       type="datetime-local"
                       fullWidth
                       className='textField'
-                      label="Event Date and Time"
+                      // label="Event Date and Time"
                       defaultValue="2017-05-24T10:30"
                       margin="dense"
                       variant="outlined"
@@ -146,6 +153,7 @@ const AddEvents = () => {
                       required
                       name="contactnumber"
                       onChange={handleInputChange}
+                      
                       value={contactnumber}
                     >
                       /</TextField>
@@ -204,6 +212,7 @@ const AddEvents = () => {
 
 
                 </Grid>
+                </form>
 
                 <Grid
                   xs={12}

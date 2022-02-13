@@ -27,9 +27,9 @@ const Login = () => {
   const handleSubmit = async(e)=>{
     e.preventDefault();
     await login(form);
+    alert(Error);
     console.log("success")
     history.push("/dashboard")
-
 }
 
   const toSignup = () =>{
@@ -47,7 +47,7 @@ const Login = () => {
         </Grid>
         <Grid>
         <form onSubmit={handleSubmit} >
-          <TextField id="email" fullWidth label="Name" placeholder='Enter your name'  required 
+          <TextField id="email" fullWidth label="Email" placeholder='Enter your Email'  required 
           onChange={(e) => 
             setForm({...form, email: e.target.value})}
           />

@@ -1,0 +1,17 @@
+.button {
+    padding: 10px;
+    margin: 8px;
+    border-radius: 5px;
+    border: 1px solid blueviolet;
+    color: blueviolet;
+    cursor: pointer;
+    
+}
+.button2 {
+    padding: 0px;
+    margin: 9px;
+    border-radius: 5px;
+    border: 1px solid blueviolet;
+    color: blueviolet;
+    cursor: pointer;
+}

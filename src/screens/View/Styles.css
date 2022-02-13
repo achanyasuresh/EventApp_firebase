@@ -180,3 +180,33 @@
     color: grey;
     background-color: grey;
   }
+  .Button1 {
+    padding: 10px;
+    margin: 8px;
+    border-radius: 5px;
+    border: 1px solid green;
+    color: green;
+    cursor: pointer;
+
+  }
+  .Button2 {
+    padding: 10px;
+    margin: 8px;
+    border-radius: 5px;
+    border: 1px solid blueviolet;
+    color: blueviolet;
+    cursor: pointer;
+
+  }
+  .Button3 {
+    padding: 10px;
+    margin: 8px;
+    border-radius: 5px;
+    border: 1px solid red;
+    color: red;
+    cursor: pointer;
+
+  }
+  .buttondiv1 {
+    padding-left: 1500px;
+  }

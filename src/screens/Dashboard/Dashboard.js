@@ -21,6 +21,9 @@ import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';
 import fireDb from "../../firebase";
 import ViewEvent from '../View/View';
+import Header from '../../components/Header/Header';
+import { Token } from '@mui/icons-material';
+import Head from '../../components/Header/head';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -51,6 +54,7 @@ const Dashboard = () => {
   const [expanded, setExpanded] = React.useState(false);
 
   useEffect(() => {
+    
     console.log("inside effect")
     fireDb.child('Events').on('value', snapshot => {
         console.log("inside db")
@@ -71,6 +75,7 @@ const Dashboard = () => {
   return (
     <div>
       <Paper>
+        <Head/>
         <Grid>
         <Paper>
         <Grid>

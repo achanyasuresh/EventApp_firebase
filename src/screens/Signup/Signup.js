@@ -19,6 +19,7 @@ import {register} from "../contexts/AuthContext"
 
 const Signup = () => {
   const avatarStyle = {backgroundColor: "blueviolet"}
+  const [erroressage, setErrorMessage] = useState("");
   const [form,setForm] = useState({
     name: '',
     phone:'',
@@ -27,11 +28,13 @@ const Signup = () => {
     confirmpassword:''
 })
 const history = useHistory();
+
 const handleSubmit = async(e)=>{
   e.preventDefault();
   await register(form);
-  history.push("/login");
-
+  console.log("eee",form);
+  console.log("eee",e)
+   history.push("/login");
 }
  
   
@@ -102,7 +105,7 @@ const handleSubmit = async(e)=>{
           <FormControlLabel
             control={<Checkbox
               name="checkedA" />}
-            label="I accept theterms and conditions"
+            label="I accept the terms and conditions"
           />
           
           <Button 

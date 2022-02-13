@@ -65,11 +65,12 @@ const ViewEvent = () => {
 
   return (
     <div className='buttondiv'>
-          <label>Event type :</label>
-          <button onClick={() => filterData("Online")}>Online</button>
-          <button onClick={() => filterData("Offline")}>Offline</button>
-          <button onClick={handleReset}>Reset</button>
-      
+         <div className='buttondiv1'>
+          
+          <button className='Button1' onClick={() => filterData("Online")}>Online</button>
+          <button className='Button2' onClick={() => filterData("Offline")}>Offline</button>
+          <button className='Button3' onClick={handleReset}>Reset</button>
+        </div>
     <div className='eventContainer'>
      {/* {console.log("insidee of return" , data)} */}
         {data.slice(pageVisited, pageVisited + usersPerPage).map((item) => {

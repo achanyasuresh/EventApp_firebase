@@ -3,6 +3,8 @@ import {useLocation,Link} from "react-router-dom"
 import background from "../../assets/images/b.jpg"
 import fireDb from "../../firebase";
 import SubHeader from '../../components/SubHeader/SubHeader';
+import Header from '../../components/Header/Header';
+import Head from '../../components/Header/head';
 
 const Search = () => {
     const [data,setData] = useState({});
@@ -29,6 +31,7 @@ const Search = () => {
     };
   return (
     <div className='buttondiv'>
+        <Head />
         <SubHeader />
        
     <div className='eventContainer'>

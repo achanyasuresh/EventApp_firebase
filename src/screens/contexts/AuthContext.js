@@ -12,5 +12,8 @@ export const register = async({email, password})=>{
 export const login = async({email, password})=>{
     const res = await firebase.auth()
       .signInWithEmailAndPassword(email, password);
+      
+      localStorage.setItem("token" ,res.user.refreshToken);
     return res.user;
+    
 }

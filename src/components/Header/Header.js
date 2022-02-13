@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import {useHistory } from "react-router-dom";
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
@@ -74,10 +74,25 @@ const Header = () => {
     const [anchorElNav, setAnchorElNav] = React.useState(null);
     const [anchorElUser, setAnchorElUser] = React.useState(null);
     const[search, setSearch] = useState();
+    const [data, setData] = useState(false);
+    const [tokenVal, setTokenVal] = useState(false);
     let history = useHistory();
   
-    const handleOpenUserMenu = (event) => {
-      setAnchorElUser(event.currentTarget);
+
+    useEffect (() => {
+      const token = localStorage.getItem("token")
+      console.log("token", token);
+      if (token){
+        setTokenVal(true);
+      }
+      else{
+        setTokenVal(false);
+      }
+    } ,[setTokenVal])
+
+     
+    const toSignup = () => {
+      history.push("/signup")
     };
     const addEvent = () => {
       history.push("/addevents");
@@ -85,6 +100,9 @@ const Header = () => {
     const toHome = () => {
         history.push("/dashboard");
       };
+    const toLogout = () => {
+
+    }
       const handleSubmit = (e) => {
         e.preventDefault();
         history.push(`/search?eventname=${search}`);
@@ -114,11 +132,18 @@ const Header = () => {
           <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
            
           </Box>
+          
+            {tokenVal == true ? 
+
+            
           <StyledFab color="secondary" aria-label="add">
               <AddIcon 
               onClick = {addEvent}
               />
-            </StyledFab>
+          </StyledFab>  
+          : null }    
+          
+
             <form onSubmit={handleSubmit}>
           <Search>
               <SearchIconWrapper>
@@ -134,9 +159,17 @@ const Header = () => {
           </form>
           <Box sx={{ flexGrow: 0 }}>
             <Tooltip title="Open settings">
-              <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
-              </IconButton>
+            <Button variant="contained" color="secondary" onClick={toSignup}>
+                Sign Up
+          </Button>
+            </Tooltip>
+            
+          </Box>
+          <Box sx={{ flexGrow: 0 }}>
+            <Tooltip title="Open settings">
+            <Button variant="contained" color="secondary" onClick={toLogout}>
+                Logout
+          </Button>
             </Tooltip>
             
           </Box>
