@@ -5,10 +5,10 @@ import "./Styles.css";
 const SubHeader = () => {
   return (
     <div className='eventContainer'>
-     <img src={background} height="300" width="1848" />
+     <img src={background} height="250" width="1848" />
      <Typography variant='h2' align='center'>
     All your event make you happy
-  </Typography>
+    </Typography>
     </div>
     
   )

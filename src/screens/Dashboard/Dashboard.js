@@ -1,4 +1,4 @@
-import React , {useEffect,useState} from 'react';
+import React, { useEffect, useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import clsx from 'clsx';
 import Card from '@material-ui/core/Card';
@@ -54,44 +54,42 @@ const Dashboard = () => {
   const [expanded, setExpanded] = React.useState(false);
 
   useEffect(() => {
-    
+
     fireDb.child('Events').on('value', snapshot => {
-        
 
-        if(snapshot.val() !== null) {  
-          
-            setData({ ...snapshot.val() })
 
-        } 
-        else {
-            setData({})
-        }
+      if (snapshot.val() !== null) {
+
+        setData({ ...snapshot.val() })
+
+      }
+      else {
+        setData({})
+      }
     })
-}, []); 
+  }, []);
   const handleExpandClick = () => {
     setExpanded(!expanded);
   };
   return (
     <div>
       <Paper>
-        <Head/>
+        
         <Grid>
-        <Paper>
-        <Grid>
-          <img  src={background} height="300" width="1848"></img>
-        </Grid>
-        </Paper>
-       
+        <Head />
+          <Grid>  
+              <img src={background} height="250px" width="100%"></img>
+            </Grid>
           <Typography variant='h2' align='center'>
             All your event make you happy
           </Typography>
           <ViewEvent />
 
-    
-    </Grid>
 
-    
-    </Paper>
+        </Grid>
+
+
+      </Paper>
 
     </div>
   )

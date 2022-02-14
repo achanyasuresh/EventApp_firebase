@@ -1,5 +1,5 @@
-import React, { useEffect, useState, useRef} from 'react';
-import   { useHistory} from"react-router-dom"
+import React, { useEffect, useState, useRef } from 'react';
+import { useHistory } from "react-router-dom"
 import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
@@ -14,90 +14,91 @@ import "../Signup/Styles.css";
 import Avatar from '@material-ui/core/Avatar';
 import Link from '@material-ui/core/Link';
 import AddCircleOutlineOutlinedIcon from '@material-ui/icons/AddCircleOutlineOutlined';
-import {register} from "../contexts/AuthContext"
+import { register } from "../contexts/AuthContext"
 
 
 const Signup = () => {
-  const avatarStyle = {backgroundColor: "blueviolet"}
+  const avatarStyle = { backgroundColor: "blueviolet" }
   const [erroressage, setErrorMessage] = useState("");
-  const [form,setForm] = useState({
+  const [form, setForm] = useState({
     name: '',
-    phone:'',
-    email:'',
-    password:'',
-    confirmpassword:''
-})
-const history = useHistory();
+    phone: '',
+    email: '',
+    password: '',
+    confirmpassword: ''
+  })
+  const history = useHistory();
 
-const handleSubmit = async(e)=>{
-  e.preventDefault();
-  await register(form);
-   history.push("/login");
-}
- 
-  
-  const toLogin = () =>{
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    await register(form);
+    console.log(form)
+    history.push("/login");
+  }
+
+
+  const toLogin = () => {
     history.push("/login");
 
   }
   return (
     <Grid>
       <Paper elevation={20} className="paperStyle">
-      
+
         <Grid align='center'>
-          <Avatar className='avatarStyle' color="primary" style={avatarStyle}> 
+          <Avatar className='avatarStyle' color="primary" style={avatarStyle}>
             <AddCircleOutlineOutlinedIcon />
           </Avatar>
           <h2 className='headerStyle'>Signup</h2>
           <Typography variant='caption' gutterBottom>Please fill this from to createan account</Typography>
         </Grid>
         <form onSubmit={handleSubmit} >
-          <TextField 
-          id='name'
-          fullWidth 
-          label="Name" 
-          placeholder='Enter your name' 
-          onChange={(e) => 
-            setForm({...form, name: e.target.value})}
+          <TextField
+            id='name'
+            fullWidth
+            label="Name"
+            placeholder='Enter your name'
+            onChange={(e) =>
+              setForm({ ...form, name: e.target.value })}
 
           />
           <br />
           <br />
-         
-          <TextField 
-          id='email'
-          fullWidth 
-          label="Email" 
-          placeholder='Enter your email' 
-          onChange={(e) => 
-            setForm({...form, email: e.target.value})}
+
+          <TextField
+            id='email'
+            fullWidth
+            label="Email"
+            placeholder='Enter your email'
+            onChange={(e) =>
+              setForm({ ...form, email: e.target.value })}
           />
           <br /><br />
-          <TextField 
-          id='phone'
-          fullWidth 
-          label="Phone Number" 
-          placeholder='Enter your phone' 
-          onChange={(e) => 
-            setForm({...form, phone: e.target.value})}
+          <TextField
+            id='phone'
+            fullWidth
+            label="Phone Number"
+            placeholder='Enter your phone'
+            onChange={(e) =>
+              setForm({ ...form, phone: e.target.value })}
           />
           <br /><br />
-          <TextField 
-          id='password'
-          fullWidth 
-          label="Password" 
-          placeholder='Enter your password' 
-          onChange={(e) => 
-            setForm({...form, password: e.target.value})}
+          <TextField
+            id='password'
+            fullWidth
+            label="Password"
+            placeholder='Enter your password'
+            onChange={(e) =>
+              setForm({ ...form, password: e.target.value })}
           />
           <br /><br />
-          <TextField 
-          id='confirmpassword'
-          fullWidth 
-          label="Confirm Password" 
-          placeholder='confirm your passeword' 
-          onChange={(e) => 
-            setForm({...form, confirmpassword: e.target.value})}
+          <TextField
+            id='confirmpassword'
+            fullWidth
+            label="Confirm Password"
+            placeholder='confirm your passeword'
+            onChange={(e) =>
+              setForm({ ...form, confirmpassword: e.target.value })}
           />
           <br /><br />
           <FormControlLabel
@@ -105,22 +106,22 @@ const handleSubmit = async(e)=>{
               name="checkedA" />}
             label="I accept the terms and conditions"
           />
-          
-          <Button 
-          type='submit' 
-          variant="contained" 
-          color="primary" 
-          className='buttonStyle'
-          > 
-           Sign Up
+
+          <Button
+            type='submit'
+            variant="contained"
+            color="primary"
+            className='buttonStyle'
+          >
+            Sign Up
           </Button>
           <br /><br />
           <Typography >
-              Already have an account ?
+            Already have an account ?
             <Link href="#" onClick={toLogin}>
-                Login 
-              </Link>
-            </Typography>
+              Login
+            </Link>
+          </Typography>
         </form>
       </Paper>
     </Grid>
