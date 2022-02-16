@@ -109,7 +109,7 @@ export default function Head() {
 
 
   const toHome = () => {
-    history.push("/dashboard")
+    history.push("/home")
   }
   const addEvents = () => {
     history.push("/addevents")
@@ -126,7 +126,7 @@ export default function Head() {
     localStorage.removeItem("token");
     history.go(0)
 
-    history.push("/dashboard");
+    history.push("/home");
 
   }
 

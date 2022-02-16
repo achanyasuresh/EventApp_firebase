@@ -10,10 +10,12 @@ import MenuItem from '@material-ui/core/MenuItem';
 import FormControl from '@material-ui/core/FormControl';
 import InputLabel from '@material-ui/core/InputLabel';
 import "../Events/Styles.css";
-import { toast } from "react-toastify";
 import fireDb from "../../firebase";
 import Header from '../../components/Header/Header';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import Head from '../../components/Header/head';
+import FormHelperText from '@mui/material/FormHelperText';
 
 const initialState = {
   eventname: '',
@@ -31,30 +33,18 @@ const AddEvents = () => {
   const [state, setState] = useState(initialState);
   const [data, setData] = useState({});
   const [val, setVal] = useState();
-
+  const [validate, setValidate] = useState(false);
   const [isError, setIsError] = useState(false);
   const { eventname, eventdate, eventlocation, contactperson, contactnumber, email, eventtype, description } = state;
   const history = useHistory();
 
   const handleSubmit = (e) => {
-
+    setValidate(true);
     e.preventDefault();
     if (!eventname || !eventdate || !eventlocation || !contactnumber || !contactperson || !email || !eventtype || !description) {
-      alert("Please enter the field value");
-      
+     
     }
-    else if(eventname.length < 5){
-      alert(" Event name Too short")
-    }
-    else if (contactnumber.length !== 10 ){
-      alert("enter valid phone number")
-    }
-    else if (email == /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/) {
-      alert("Enter valid email format")
-    }
-    else if (description.length <10 && description.length >5 ) {
-      alert("make sure the input is between 5-10 characters long")
-    }
+    
     else {
       fireDb.child("Events").push(state, (err) => {
 
@@ -64,10 +54,11 @@ const AddEvents = () => {
         }
         else {
 
-          alert("contact added successfully");
+          toast.success("Event added successfully");
+          setValidate(false);
         }
       });
-      setTimeout(() => history.push("/dashboard"), 500);
+      setTimeout(() => history.push("/home"), 500);
     }
   };
 
@@ -103,8 +94,16 @@ const AddEvents = () => {
                         name="eventname"
                         value={eventname}
                         onChange={handleInputChange}
+                        
+
                       >
+
                       </TextField>
+                      
+                      { validate== true && eventname ==  "" ?  <FormHelperText style={{ color: "red" }}>Please enter name</FormHelperText> : null
+
+                       
+                      }
                     </Grid>
 
                     <Grid xs={12} md={4} item >
@@ -122,7 +121,11 @@ const AddEvents = () => {
                         onChange={handleInputChange}
                         value={eventdate}
                       >
-                        /</TextField>
+                        </TextField>
+                        { validate== true && eventdate ==  "" ?  <FormHelperText style={{ color: "red" }}>Please Enter Date</FormHelperText> : null
+
+                       
+                      }
                     </Grid>
                     <Grid xs={12} md={4} item >
                       <TextField
@@ -138,7 +141,11 @@ const AddEvents = () => {
                         onChange={handleInputChange}
                         value={eventlocation}
                       >
-                        /</TextField>
+                        </TextField>
+                        { validate== true && eventlocation ==  "" ?  <FormHelperText style={{ color: "red" }}>Please Enter Location</FormHelperText> : null
+
+                       
+                      }
                     </Grid>
                     <Grid xs={12} md={4} item >
                       <TextField
@@ -153,7 +160,11 @@ const AddEvents = () => {
                         onChange={handleInputChange}
                         value={contactperson}
                       >
-                        /</TextField>
+                        </TextField>
+                        { validate== true && contactperson ==  "" ?  <FormHelperText style={{ color: "red" }}>Please enter Contact Person</FormHelperText> : null
+
+                       
+                      }
                     </Grid>
                     <Grid xs={12} md={4} item >
                       <TextField
@@ -169,7 +180,12 @@ const AddEvents = () => {
 
                         value={contactnumber}
                       >
-                        /</TextField>
+                        </TextField>
+                        { validate== true && contactnumber ==  "" && contactnumber.length !== 10 ?  <FormHelperText style={{ color: "red" }}>Please Enter Contact Number</FormHelperText> : null
+
+                       
+                      }
+                      
                     </Grid>
                     <Grid xs={12} md={4} item >
                       <TextField
@@ -184,7 +200,11 @@ const AddEvents = () => {
                         onChange={handleInputChange}
                         value={email}
                       >
-                        /</TextField>
+                        </TextField>
+                        { validate== true && email ==  "" ?  <FormHelperText style={{ color: "red" }}>Please Enter Email</FormHelperText> : null
+
+                       
+                      }
                     </Grid>
                     <Grid xs={12} md={4} item >
                       <TextField
@@ -192,8 +212,6 @@ const AddEvents = () => {
                         className='textField'
                         id="description"
                         label="Description"
-                        multiline
-                        maxRows={4}
                         margin="dense"
                         variant="outlined"
                         required
@@ -201,7 +219,11 @@ const AddEvents = () => {
                         onChange={handleInputChange}
                         value={description}
                       >
-                        /</TextField>
+                        </TextField>
+                        { validate== true && description ==  "" ?  <FormHelperText style={{ color: "red" }}>Please Add some Description</FormHelperText> : null
+
+                       
+                      }
                     </Grid>
                     <Grid xs={12} md={4} item >
                       <TextField
@@ -210,8 +232,6 @@ const AddEvents = () => {
                         id="eventtype"
                         label="Event Type"
                         placeholder='Event type Offline or Online'
-                        multiline
-                        maxRows={4}
                         margin="dense"
                         variant="outlined"
                         required
@@ -219,7 +239,11 @@ const AddEvents = () => {
                         onChange={handleInputChange}
                         value={eventtype}
                       >
-                        /</TextField>
+                        </TextField>
+                        { validate== true && eventtype ==  "" ?  <FormHelperText style={{ color: "red" }}>Please Add Event type</FormHelperText> : null
+
+                       
+                      }
 
                     </Grid>
 
@@ -250,7 +274,7 @@ const AddEvents = () => {
                     spacing={4}
 
                   >
-                    <Button
+                    {/* <Button
                       disableElevation={true}
                       variant="contained"
                       className="clearButton"
@@ -258,7 +282,7 @@ const AddEvents = () => {
                       onClick={() => setVal(() => "")}
                     >
                       Clear
-                    </Button>
+                    </Button> */}
 
 
                   </Grid>
@@ -274,6 +298,7 @@ const AddEvents = () => {
                     >
                       ADD
                     </Button>
+                    <ToastContainer />
                   </Grid>
                 </Grid>
                 {/* </form> */}

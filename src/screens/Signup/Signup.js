@@ -7,13 +7,13 @@ import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Checkbox from '@material-ui/core/Checkbox';
-import Select from '@material-ui/core/Select';
-import MenuItem from '@material-ui/core/MenuItem';
-import FormControl from '@material-ui/core/FormControl';
 import "../Signup/Styles.css";
 import Avatar from '@material-ui/core/Avatar';
 import Link from '@material-ui/core/Link';
 import AddCircleOutlineOutlinedIcon from '@material-ui/icons/AddCircleOutlineOutlined';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import { toaster } from 'evergreen-ui'
 import { register } from "../contexts/AuthContext"
 
 
@@ -24,16 +24,23 @@ const Signup = () => {
     name: '',
     phone: '',
     email: '',
-    password: '',
-    confirmpassword: ''
+    password: ''
   })
   const history = useHistory();
 
   const handleSubmit = async (e) => {
-    e.preventDefault();
+
+    try {
+      e.preventDefault();
     await register(form);
     console.log(form)
+    toast.success("User Signed In");
     history.push("/login");
+    }
+    catch(err) {
+      toaster.notify(err.message);
+    }
+    
   }
 
 
@@ -50,7 +57,7 @@ const Signup = () => {
             <AddCircleOutlineOutlinedIcon />
           </Avatar>
           <h2 className='headerStyle'>Signup</h2>
-          <Typography variant='caption' gutterBottom>Please fill this from to createan account</Typography>
+          <Typography variant='caption' gutterBottom>Please fill this from to create an account</Typography>
         </Grid>
         <form onSubmit={handleSubmit} >
           <TextField
@@ -92,7 +99,7 @@ const Signup = () => {
               setForm({ ...form, password: e.target.value })}
           />
           <br /><br />
-          <TextField
+          {/* <TextField
             id='confirmpassword'
             fullWidth
             label="Confirm Password"
@@ -100,12 +107,12 @@ const Signup = () => {
             onChange={(e) =>
               setForm({ ...form, confirmpassword: e.target.value })}
           />
-          <br /><br />
-          <FormControlLabel
+          <br /><br /> */}
+          {/* <FormControlLabel
             control={<Checkbox
               name="checkedA" />}
             label="I accept the terms and conditions"
-          />
+          /> */}
 
           <Button
             type='submit'
@@ -115,6 +122,7 @@ const Signup = () => {
           >
             Sign Up
           </Button>
+          <ToastContainer />
           <br /><br />
           <Typography >
             Already have an account ?

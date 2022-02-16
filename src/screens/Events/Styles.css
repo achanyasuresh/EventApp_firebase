@@ -27,7 +27,14 @@
     opacity: 1;
     height: 45px;
 }
-
+.helpertext {
+    background-color: red;
+    color: white;
+    padding: 1em 1.5em;
+    text-decoration: none;
+    text-transform: uppercase;
+        
+}
 /* .grid {
     margin-top: 26px;
     padding-top: 17px;

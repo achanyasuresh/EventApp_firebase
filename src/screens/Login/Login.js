@@ -14,6 +14,9 @@ import Select from '@material-ui/core/Select';
 import Link from '@material-ui/core/Link';
 import MenuItem from '@material-ui/core/MenuItem';
 import FormControl from '@material-ui/core/FormControl';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import { toaster } from 'evergreen-ui'
 import { login } from "../contexts/AuthContext"
 
 const Login = () => {
@@ -25,9 +28,17 @@ const Login = () => {
   const history = useHistory();
 
   const handleSubmit = async (e) => {
-    e.preventDefault();
-    await login(form);
-    history.push("/dashboard")
+    try {
+      e.preventDefault();
+      await login(form)
+      toaster.notify("Login Success");
+       history.push("/home")  
+
+    }
+    catch (err){
+      toaster.notify(err.message);
+    }
+   
   }
 
   const toSignup = () => {
@@ -55,11 +66,11 @@ const Login = () => {
               onChange={(e) =>
                 setForm({ ...form, password: e.target.value })}
             />
-            <FormControlLabel
+            {/* <FormControlLabel
               control={<Checkbox
                 name="checkedA" />}
               label="Remember Me"
-            />
+            /> */}
             <br /> <br />
             <div>
               <Button
@@ -71,11 +82,12 @@ const Login = () => {
               >
                 Login
               </Button>
+              <ToastContainer />
               <br /> <br />
               <Typography >
-                <Link href="#" >
+                {/* <Link href="#" >
                   Forgot Password
-                </Link>
+                </Link> */}
               </Typography>
               <br />
               <Typography >

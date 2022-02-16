@@ -97,7 +97,7 @@ const Header = () => {
     history.push("/addevents");
   };
   const toHome = () => {
-    history.push("/dashboard");
+    history.push("/home");
   };
   const toLogout = () => {
 
