@@ -12,6 +12,7 @@ import Avatar from '@material-ui/core/Avatar';
 import Link from '@material-ui/core/Link';
 import AddCircleOutlineOutlinedIcon from '@material-ui/icons/AddCircleOutlineOutlined';
 import { ToastContainer, toast } from 'react-toastify';
+import FormHelperText from '@mui/material/FormHelperText';
 import 'react-toastify/dist/ReactToastify.css';
 import { toaster } from 'evergreen-ui'
 import { register } from "../contexts/AuthContext"
@@ -20,6 +21,7 @@ import { register } from "../contexts/AuthContext"
 const Signup = () => {
   const avatarStyle = { backgroundColor: "blueviolet" }
   const [erroressage, setErrorMessage] = useState("");
+  const [validate, setValidate] = useState(false);
   const [form, setForm] = useState({
     name: '',
     phone: '',
@@ -29,18 +31,19 @@ const Signup = () => {
   const history = useHistory();
 
   const handleSubmit = async (e) => {
-
+    setValidate(true);
     try {
       e.preventDefault();
-    await register(form);
-    console.log(form)
-    toast.success("User Signed In");
-    history.push("/login");
+      await register(form);
+      console.log(form)
+      toast.success("User Signed In");
+      history.push("/login");
+      setValidate(false);
     }
-    catch(err) {
+    catch (err) {
       toaster.notify(err.message);
     }
-    
+
   }
 
 
@@ -68,9 +71,15 @@ const Signup = () => {
             onChange={(e) =>
               setForm({ ...form, name: e.target.value })}
 
+
           />
+          {validate == true && form.name == "" ? <FormHelperText style={{ color: "red" }}>Please enter name</FormHelperText> : null
+
+
+          }
+
           <br />
-          <br />
+         
 
           <TextField
             id='email'
@@ -80,7 +89,11 @@ const Signup = () => {
             onChange={(e) =>
               setForm({ ...form, email: e.target.value })}
           />
-          <br /><br />
+          {validate == true && form.email == "" ? <FormHelperText style={{ color: "red" }}>Please enter Email</FormHelperText> : null
+
+
+          }
+          <br />
           <TextField
             id='phone'
             fullWidth
@@ -89,16 +102,25 @@ const Signup = () => {
             onChange={(e) =>
               setForm({ ...form, phone: e.target.value })}
           />
-          <br /><br />
+          {validate == true && form.phone == "" ? <FormHelperText style={{ color: "red" }}>Please enter Your Phone</FormHelperText> : null
+
+
+          }
+          <br />
           <TextField
             id='password'
+            type="password"
             fullWidth
             label="Password"
             placeholder='Enter your password'
             onChange={(e) =>
               setForm({ ...form, password: e.target.value })}
           />
-          <br /><br />
+          {validate == true && form.password == "" ? <FormHelperText style={{ color: "red" }}>Please enter a password</FormHelperText> : null
+
+
+          }
+          <br />  <br />
           {/* <TextField
             id='confirmpassword'
             fullWidth
@@ -123,7 +145,7 @@ const Signup = () => {
             Sign Up
           </Button>
           <ToastContainer />
-          <br /><br />
+          <br />
           <Typography >
             Already have an account ?
             <Link href="#" onClick={toLogin}>

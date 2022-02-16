@@ -14,6 +14,7 @@ import Select from '@material-ui/core/Select';
 import Link from '@material-ui/core/Link';
 import MenuItem from '@material-ui/core/MenuItem';
 import FormControl from '@material-ui/core/FormControl';
+import FormHelperText from '@mui/material/FormHelperText';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { toaster } from 'evergreen-ui'
@@ -21,6 +22,7 @@ import { login } from "../contexts/AuthContext"
 
 const Login = () => {
   const avatarStyle = { backgroundColor: "green" }
+  const [validate, setValidate] = useState(false);
   const [form, setForm] = useState({
     email: '',
     password: ''
@@ -28,11 +30,13 @@ const Login = () => {
   const history = useHistory();
 
   const handleSubmit = async (e) => {
+    setValidate(true);
     try {
       e.preventDefault();
       await login(form)
       toaster.notify("Login Success");
        history.push("/home")  
+       setValidate(false);
 
     }
     catch (err){
@@ -56,16 +60,24 @@ const Login = () => {
         </Grid>
         <Grid>
           <form onSubmit={handleSubmit} >
-            <TextField id="email" fullWidth label="Email" placeholder='Enter your Email' required
+            <TextField id="email" fullWidth label="Email" placeholder='Enter your Email' 
               onChange={(e) =>
                 setForm({ ...form, email: e.target.value })}
             />
+            {validate == true && form.email == "" ? <FormHelperText style={{ color: "red" }}>Please enter email</FormHelperText> : null
+
+
+}
             <br /> <br />
 
-            <TextField id='password' fullWidth label="Password" type="password" placeholder='Enter your password' required
+            <TextField id='password' fullWidth label="Password" type="password" placeholder='Enter your password' 
               onChange={(e) =>
                 setForm({ ...form, password: e.target.value })}
             />
+            {validate == true && form.password == "" ? <FormHelperText style={{ color: "red" }}>Please enter Password</FormHelperText> : null
+
+
+}
             {/* <FormControlLabel
               control={<Checkbox
                 name="checkedA" />}
