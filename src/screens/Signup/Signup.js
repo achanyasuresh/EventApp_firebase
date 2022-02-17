@@ -18,7 +18,7 @@ import { toaster } from 'evergreen-ui'
 import { register } from "../contexts/AuthContext"
 
 
-const Signup = () => {
+const Signup = (props) => {
   const avatarStyle = { backgroundColor: "blueviolet" }
   const [erroressage, setErrorMessage] = useState("");
   const [validate, setValidate] = useState(false);

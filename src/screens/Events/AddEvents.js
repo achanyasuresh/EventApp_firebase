@@ -1,4 +1,6 @@
 import React, { Fragment, useEffect, useState ,useRef} from 'react';
+import firebase from 'firebase/app';
+import "firebase/auth"
 import { useHistory } from "react-router-dom"
 import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
@@ -33,10 +35,46 @@ const AddEvents = () => {
   const [state, setState] = useState(initialState);
   const [data, setData] = useState({});
   const [val, setVal] = useState();
+  const [profileData, setProfileData]= useState({});
   const [validate, setValidate] = useState(false);
   const [isError, setIsError] = useState(false);
   const { eventname, eventdate, eventlocation, contactperson, contactnumber, email, eventtype, description } = state;
   const history = useHistory();
+
+  useEffect(() => {
+
+    getProfileDetails();
+//   firebase.auth().onAuthStateChanged(user => {
+//     if(user) {
+//      console.log("user iddddddd",user.uid)
+//      console.log("userrrrrrrrrrrrr",user)
+//      console.log("user ",user.name)
+//      console.log("user iddddddd",user.phoneNumber)
+ 
+//        console.log("user emaailll" ,user.email)
+ 
+//      }
+//  })
+}, []);
+
+const getProfileDetails = () =>{
+  firebase.auth().onAuthStateChanged(user => {
+    if (user) {
+        getUserData(user.uid)
+        console.log("user iddddddd",user.uid)
+    }
+})
+}
+function getUserData(uid) {
+  firebase.database().ref('users/' + uid).once("value", snap => {
+      console.log("00000000000000000000000",snap.val())
+      // const profile = snap.val();
+      setProfileData(snap.val());
+  })
+  
+  
+}
+
 
   const handleSubmit = (e) => {
     setValidate(true);
@@ -158,7 +196,7 @@ const AddEvents = () => {
                         required
                         name="contactperson"
                         onChange={handleInputChange}
-                        value={contactperson}
+                        value={profileData.contactperson}
                       >
                         </TextField>
                         { validate== true && contactperson ==  "" ?  <FormHelperText style={{ color: "red" }}>Please enter Contact Person</FormHelperText> : null
@@ -178,7 +216,7 @@ const AddEvents = () => {
                         name="contactnumber"
                         onChange={handleInputChange}
 
-                        value={contactnumber}
+                        value={[profileData.contcatnumber]}
                       >
                         </TextField>
                         { validate== true && contactnumber ==  "" && contactnumber.length !== 10 ?  <FormHelperText style={{ color: "red" }}>Please Enter Contact Number</FormHelperText> : null
@@ -198,7 +236,7 @@ const AddEvents = () => {
                         required
                         name="email"
                         onChange={handleInputChange}
-                        value={email}
+                        value={profileData.email}
                       >
                         </TextField>
                         { validate== true && email ==  "" ?  <FormHelperText style={{ color: "red" }}>Please Enter Email</FormHelperText> : null

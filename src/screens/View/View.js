@@ -6,12 +6,15 @@ import background from "../../assets/images/b.jpg"
 const ViewEvent = () => {
     const [data, setData] = useState([]);
     const [pageNumber, setPageNumber] = useState(0);
+   
 
     const usersPerPage = 4;
     const pageVisited = pageNumber * usersPerPage;
 
 
     useEffect(() => {
+        // const uid = localStorage.getItem("uid")
+        // getProfileDetails(uid);
 
         fireDb.child('Events').on('value', snapshot => {
             snapshot.forEach(function (childSnap) {
@@ -20,10 +23,22 @@ const ViewEvent = () => {
                 });
             });
             setData(data);
+            
+        //    fireDb.child('Events')
+        //         .orderByKey()
+        //         .limitToFirst(5)
+        //         .once('value').then(r => r.val()).catch(e => console.log("eeeeeeee",e));
+
 
         });
 
+    
+
     }, []);
+    // getProfileDetails = (uid) =>{
+    //     console.log("11111111111111111")
+
+    // }    
     const handleReset = () => {
 
         const resetdata = [];
