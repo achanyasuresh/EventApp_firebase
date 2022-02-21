@@ -70,6 +70,7 @@ function getUserData(uid) {
       console.log("00000000000000000000000",snap.val())
       // const profile = snap.val();
       setProfileData(snap.val());
+      console.log("daaataa", snap.val())
   })
   
   
@@ -109,6 +110,7 @@ function getUserData(uid) {
   return (
     <Grid >
       <Paper >
+        {console.log ("progile dataaaaaaaaaaaaaaaa",profileData)}
         <Head />
         <div>
           <Fragment>
@@ -196,7 +198,8 @@ function getUserData(uid) {
                         required
                         name="contactperson"
                         onChange={handleInputChange}
-                        value={profileData.contactperson}
+                        // value={profileData.contactperson}
+                        value={contactperson}
                       >
                         </TextField>
                         { validate== true && contactperson ==  "" ?  <FormHelperText style={{ color: "red" }}>Please enter Contact Person</FormHelperText> : null
@@ -216,7 +219,8 @@ function getUserData(uid) {
                         name="contactnumber"
                         onChange={handleInputChange}
 
-                        value={[profileData.contcatnumber]}
+                        // value={[profileData.contcatnumber]}
+                        value={contactnumber}
                       >
                         </TextField>
                         { validate== true && contactnumber ==  "" && contactnumber.length !== 10 ?  <FormHelperText style={{ color: "red" }}>Please Enter Contact Number</FormHelperText> : null
@@ -236,7 +240,8 @@ function getUserData(uid) {
                         required
                         name="email"
                         onChange={handleInputChange}
-                        value={profileData.email}
+                        value={email}
+                        // value={profileData.email}
                       >
                         </TextField>
                         { validate== true && email ==  "" ?  <FormHelperText style={{ color: "red" }}>Please Enter Email</FormHelperText> : null
