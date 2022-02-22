@@ -16,12 +16,14 @@ import FormHelperText from '@mui/material/FormHelperText';
 import 'react-toastify/dist/ReactToastify.css';
 import { toaster } from 'evergreen-ui'
 import { register } from "../contexts/AuthContext"
+import Validate from './Validate';
 
 
 const Signup = (props) => {
   const avatarStyle = { backgroundColor: "blueviolet" }
   const [erroressage, setErrorMessage] = useState("");
-  const [validate, setValidate] = useState(false);
+  const [errors,setErrors]=useState('')
+  // const [validate, setValidate] = useState(false);
   const [form, setForm] = useState({
     name: '',
     phone: '',
@@ -31,19 +33,29 @@ const Signup = (props) => {
   const history = useHistory();
 
   const handleSubmit = async (e) => {
-    setValidate(true);
-    try {
-      e.preventDefault();
-      await register(form);
-      console.log(form)
-      toast.success("User Signed In");
-      history.push("/login");
-      setValidate(false);
-    }
-    catch (err) {
-      toaster.notify(err.message);
-    }
 
+    const validationErrors = Validate(form);
+    const noErrors = Object.keys(validationErrors).length === 0;
+    setErrors(validationErrors);
+    if(noErrors){
+      try {
+        e.preventDefault();
+        await register(form);
+        console.log(form)
+        toast.success("User Signed In");
+        history.push("/login");
+        // setValidate(false);
+      }
+      catch (err) {
+        toaster.notify(err.message);
+      }
+  
+
+    }
+    else{
+      console.log("errors try again",validationErrors);
+    }  
+   
   }
 
 
@@ -73,12 +85,17 @@ const Signup = (props) => {
 
 
           />
-          {validate == true && form.name == "" ? <FormHelperText style={{ color: "red" }}>Please enter name</FormHelperText> : null
+          <FormHelperText>
+             <div style={{ color: "red"}}>  
+             {errors.name && <p>{errors.name}</p>}
+             </div>
+          </FormHelperText>
+          {/* {validate == true && form.name == "" ? <FormHelperText style={{ color: "red" }}>Please enter name</FormHelperText> : null
 
 
-          }
+          } */}
 
-          <br />
+        
          
 
           <TextField
@@ -89,11 +106,16 @@ const Signup = (props) => {
             onChange={(e) =>
               setForm({ ...form, email: e.target.value })}
           />
-          {validate == true && form.email == "" ? <FormHelperText style={{ color: "red" }}>Please enter Email</FormHelperText> : null
+          <FormHelperText>
+             <div style={{ color: "red"}}>  
+             {errors.email && <p>{errors.email}</p>}
+             </div>
+          </FormHelperText>
+          {/* {validate == true && form.email == "" ? <FormHelperText style={{ color: "red" }}>Please enter Email</FormHelperText> : null
 
 
-          }
-          <br />
+          } */}
+         
           <TextField
             id='phone'
             fullWidth
@@ -102,11 +124,16 @@ const Signup = (props) => {
             onChange={(e) =>
               setForm({ ...form, phone: e.target.value })}
           />
-          {validate == true && form.phone == "" ? <FormHelperText style={{ color: "red" }}>Please enter Your Phone</FormHelperText> : null
+          <FormHelperText>
+             <div style={{ color: "red"}}>  
+             {errors.phone && <p>{errors.phone}</p>}
+             </div>
+          </FormHelperText>
+          {/* {validate == true && form.phone == "" ? <FormHelperText style={{ color: "red" }}>Please enter Your Phone</FormHelperText> : null
 
 
-          }
-          <br />
+          } */}
+        
           <TextField
             id='password'
             type="password"
@@ -116,11 +143,16 @@ const Signup = (props) => {
             onChange={(e) =>
               setForm({ ...form, password: e.target.value })}
           />
-          {validate == true && form.password == "" ? <FormHelperText style={{ color: "red" }}>Please enter a password</FormHelperText> : null
+          <FormHelperText>
+             <div style={{ color: "red"}}>  
+             {errors.password && <p>{errors.password}</p>}
+             </div>
+          </FormHelperText>
+          {/* {validate == true && form.password == "" ? <FormHelperText style={{ color: "red" }}>Please enter a password</FormHelperText> : null
 
 
-          }
-          <br />  <br />
+          } */}
+          
           {/* <TextField
             id='confirmpassword'
             fullWidth

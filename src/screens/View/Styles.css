@@ -203,10 +203,21 @@
     margin: 8px;
     border-radius: 5px;
     border: 1px solid red;
-    color: red;
+    color: white;
+    background-color: red;
     cursor: pointer;
 
   }
   .buttondiv1 {
     padding-left: 80%;
+  }
+  .Button-loading {
+    width: 80%;
+    margin-left: 3%;
+    border: 1px solid black;
+    color:violet;
+    cursor: pointer;
+    background-color:black;
+    
+    
   }

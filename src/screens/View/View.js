@@ -6,6 +6,8 @@ import background from "../../assets/images/b.jpg"
 const ViewEvent = () => {
     const [data, setData] = useState([]);
     const [pageNumber, setPageNumber] = useState(0);
+    const [limit, SetLimit]=useState(4);
+    const [loading, SetLoading] = useState(false);
    
 
     const usersPerPage = 4;
@@ -23,11 +25,6 @@ const ViewEvent = () => {
                 });
             });
             setData(data);
-            
-        //    fireDb.child('Events')
-        //         .orderByKey()
-        //         .limitToFirst(5)
-        //         .once('value').then(r => r.val()).catch(e => console.log("eeeeeeee",e));
 
 
         });
@@ -35,10 +32,7 @@ const ViewEvent = () => {
     
 
     }, []);
-    // getProfileDetails = (uid) =>{
-    //     console.log("11111111111111111")
-
-    // }    
+      
     const handleReset = () => {
 
         const resetdata = [];
@@ -68,7 +62,10 @@ const ViewEvent = () => {
             setData(filterData)
         })
     }
-
+    // const  nextPage = (limit) => {
+    //     console.log("button clicked")
+    //     SetLimit(limit + limit);
+    // }
 
 
 
@@ -118,9 +115,12 @@ const ViewEvent = () => {
                     )
                 })}
 
-
+             {/* <button className='Button-loading' onClick={() => nextPage()}>Load More</button> */}
+    
 
             </div>
+           
+
             <ReactPaginate
                 previousLabel={"Previous"}
                 nextLabel={"Next"}

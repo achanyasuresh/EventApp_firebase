@@ -18,6 +18,7 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import Head from '../../components/Header/head';
 import FormHelperText from '@mui/material/FormHelperText';
+import Validate from './Validate';
 
 const initialState = {
   eventname: '',
@@ -36,10 +37,11 @@ const AddEvents = () => {
   const [data, setData] = useState({});
   const [val, setVal] = useState();
   const [profileData, setProfileData]= useState({});
-  const [validate, setValidate] = useState(false);
+  // const [validate, setValidate] = useState(false);
   const [isError, setIsError] = useState(false);
   const { eventname, eventdate, eventlocation, contactperson, contactnumber, email, eventtype, description } = state;
   const history = useHistory();
+  const [errors,setErrors]=useState('')
 
   useEffect(() => {
 
@@ -78,13 +80,13 @@ function getUserData(uid) {
 
 
   const handleSubmit = (e) => {
-    setValidate(true);
+    // setValidate(true);
     e.preventDefault();
-    if (!eventname || !eventdate || !eventlocation || !contactnumber || !contactperson || !email || !eventtype || !description) {
-     
-    }
-    
-    else {
+    const validationErrors = Validate(state)
+    const noErrors = Object.keys(validationErrors).length === 0;
+    setErrors(validationErrors);
+    if (noErrors){
+
       fireDb.child("Events").push(state, (err) => {
 
         if (err) {
@@ -94,11 +96,16 @@ function getUserData(uid) {
         else {
 
           toast.success("Event added successfully");
-          setValidate(false);
+          // setValidate(false);
         }
       });
       setTimeout(() => history.push("/home"), 500);
+
     }
+    else{
+      console.log("errors try again",validationErrors);
+    }    
+    
   };
 
   const handleInputChange = (e) => {
@@ -110,7 +117,6 @@ function getUserData(uid) {
   return (
     <Grid >
       <Paper >
-        {console.log ("progile dataaaaaaaaaaaaaaaa",profileData)}
         <Head />
         <div>
           <Fragment>
@@ -139,11 +145,16 @@ function getUserData(uid) {
                       >
 
                       </TextField>
+                      <FormHelperText>
+                          <div style={{ color: "red"}}>  
+                          {errors.eventname && <p>{errors.eventname}</p>}
+                          </div>
+                        </FormHelperText>
                       
-                      { validate== true && eventname ==  "" ?  <FormHelperText style={{ color: "red" }}>Please enter name</FormHelperText> : null
+                      {/* { validate== true && eventname ==  "" ?  <FormHelperText style={{ color: "red" }}>Please enter name</FormHelperText> : null
 
                        
-                      }
+                      } */}
                     </Grid>
 
                     <Grid xs={12} md={4} item >
@@ -162,10 +173,15 @@ function getUserData(uid) {
                         value={eventdate}
                       >
                         </TextField>
-                        { validate== true && eventdate ==  "" ?  <FormHelperText style={{ color: "red" }}>Please Enter Date</FormHelperText> : null
+                        <FormHelperText>
+                          <div style={{ color: "red"}}>  
+                          {errors.eventdate && <p>{errors.eventdate}</p>}
+                          </div>
+                        </FormHelperText>
+                        {/* { validate== true && eventdate ==  "" ?  <FormHelperText style={{ color: "red" }}>Please Enter Date</FormHelperText> : null
 
                        
-                      }
+                      } */}
                     </Grid>
                     <Grid xs={12} md={4} item >
                       <TextField
@@ -182,10 +198,15 @@ function getUserData(uid) {
                         value={eventlocation}
                       >
                         </TextField>
-                        { validate== true && eventlocation ==  "" ?  <FormHelperText style={{ color: "red" }}>Please Enter Location</FormHelperText> : null
+                        <FormHelperText>
+                          <div style={{ color: "red"}}>  
+                          {errors.eventlocation && <p>{errors.eventlocation}</p>}
+                          </div>
+                        </FormHelperText>
+                        {/* { validate== true && eventlocation ==  "" ?  <FormHelperText style={{ color: "red" }}>Please Enter Location</FormHelperText> : null
 
                        
-                      }
+                      } */}
                     </Grid>
                     <Grid xs={12} md={4} item >
                       <TextField
@@ -202,10 +223,15 @@ function getUserData(uid) {
                         value={contactperson}
                       >
                         </TextField>
-                        { validate== true && contactperson ==  "" ?  <FormHelperText style={{ color: "red" }}>Please enter Contact Person</FormHelperText> : null
+                        <FormHelperText>
+                          <div style={{ color: "red"}}>  
+                          {errors.contactperson && <p>{errors.contactperson}</p>}
+                          </div>
+                        </FormHelperText>
+                        {/* { validate== true && contactperson ==  "" ?  <FormHelperText style={{ color: "red" }}>Please enter Contact Person</FormHelperText> : null
 
                        
-                      }
+                      } */}
                     </Grid>
                     <Grid xs={12} md={4} item >
                       <TextField
@@ -223,11 +249,16 @@ function getUserData(uid) {
                         value={contactnumber}
                       >
                         </TextField>
-                        { validate== true && contactnumber ==  "" && contactnumber.length !== 10 ?  <FormHelperText style={{ color: "red" }}>Please Enter Contact Number</FormHelperText> : null
+                        <FormHelperText>
+                          <div style={{ color: "red"}}>  
+                          {errors.contactnumber && <p>{errors.contactnumber}</p>}
+                          </div>
+                        </FormHelperText>
+                        {/* { validate== true && contactnumber ==  "" && contactnumber.length !== 10 ?  <FormHelperText style={{ color: "red" }}>Please Enter Contact Number</FormHelperText> : null
 
                        
                       }
-                      
+                       */}
                     </Grid>
                     <Grid xs={12} md={4} item >
                       <TextField
@@ -244,10 +275,16 @@ function getUserData(uid) {
                         // value={profileData.email}
                       >
                         </TextField>
-                        { validate== true && email ==  "" ?  <FormHelperText style={{ color: "red" }}>Please Enter Email</FormHelperText> : null
+
+                        <FormHelperText>
+                          <div style={{ color: "red"}}>  
+                          {errors.email && <p>{errors.email}</p>}
+                          </div>
+                        </FormHelperText>
+                        {/* { validate== true && email ==  "" ?  <FormHelperText style={{ color: "red" }}>Please Enter Email</FormHelperText> : null
 
                        
-                      }
+                      } */}
                     </Grid>
                     <Grid xs={12} md={4} item >
                       <TextField
@@ -263,10 +300,15 @@ function getUserData(uid) {
                         value={description}
                       >
                         </TextField>
-                        { validate== true && description ==  "" ?  <FormHelperText style={{ color: "red" }}>Please Add some Description</FormHelperText> : null
+                        <FormHelperText>
+                          <div style={{ color: "red"}}>  
+                          {errors.description && <p>{errors.description}</p>}
+                          </div>
+                        </FormHelperText>
+                        {/* { validate== true && description ==  "" ?  <FormHelperText style={{ color: "red" }}>Please Add some Description</FormHelperText> : null
 
                        
-                      }
+                      } */}
                     </Grid>
                     <Grid xs={12} md={4} item >
                       <TextField
@@ -283,10 +325,15 @@ function getUserData(uid) {
                         value={eventtype}
                       >
                         </TextField>
-                        { validate== true && eventtype ==  "" ?  <FormHelperText style={{ color: "red" }}>Please Add Event type</FormHelperText> : null
+                        <FormHelperText>
+                          <div style={{ color: "red"}}>  
+                          {errors.eventtype && <p>{errors.eventtype}</p>}
+                          </div>
+                        </FormHelperText>
+                        {/* { validate== true && eventtype ==  "" ?  <FormHelperText style={{ color: "red" }}>Please Add Event type</FormHelperText> : null
 
                        
-                      }
+                      } */}
 
                     </Grid>
 
